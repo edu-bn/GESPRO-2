@@ -202,6 +202,10 @@ Sincronizar la base de datos (Migraciones):
 python manage.py migrate
 ```
 Iniciar el servidor de desarrollo:
+```
+python manage.py runserver
+```
+Por defecto, el servidor estará disponible en http://127.0.0.1:8000/.
 
 ## 2.2 Terminal 2: Compilador de Estilos (Tailwind CSS)
 Django utiliza un paquete de integración para Tailwind que requiere una terminal dedicada para detectar cambios en el diseño en tiempo real.
