@@ -195,45 +195,45 @@ Q_CLUSTER = {
     "orm": "default",
 }
 
-EMAIL_MODE = os.getenv("EMAIL_MODE", "dummy")
+# EMAIL_MODE = os.getenv("EMAIL_MODE", "dummy")
 
-if EMAIL_MODE == "dummy":
-    EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
-elif EMAIL_MODE == "console":
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-elif EMAIL_MODE == "smtp": # Especificamos smtp claramente
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = os.getenv("SMTP_SERVER")
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.getenv("EMAIL")
-    # Limpiamos la contraseña por si acaso tiene espacios del .env
-    EMAIL_HOST_PASSWORD = os.getenv("PASSWORD_APP").replace(" ", "") 
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-#allauth settings
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USERNAME_REQUIRED = False
+# if EMAIL_MODE == "dummy":
+#     EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
+# elif EMAIL_MODE == "console":
+#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# elif EMAIL_MODE == "smtp": # Especificamos smtp claramente
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#     EMAIL_HOST = os.getenv("SMTP_SERVER")
+#     EMAIL_PORT = 587
+#     EMAIL_USE_TLS = True
+#     EMAIL_HOST_USER = os.getenv("EMAIL")
+#     # Limpiamos la contraseña por si acaso tiene espacios del .env
+#     EMAIL_HOST_PASSWORD = os.getenv("PASSWORD_APP").replace(" ", "") 
+#     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# #allauth settings
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ACCOUNT_USERNAME_REQUIRED = False
 
-# Usar email como identificador
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = "email"
+# # Usar email como identificador
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = "email"
 
-# Crear cuenta automáticamente sin pantalla intermedia
-SOCIALACCOUNT_AUTO_SIGNUP = True
+# # Crear cuenta automáticamente sin pantalla intermedia
+# SOCIALACCOUNT_AUTO_SIGNUP = True
 
-# Tomar nombre y email desde Google
-SOCIALACCOUNT_QUERY_EMAIL = True
-LOGIN_REDIRECT_URL = '/proyectos'
+# # Tomar nombre y email desde Google
+# SOCIALACCOUNT_QUERY_EMAIL = True
+# LOGIN_REDIRECT_URL = '/proyectos'
 
-MIDDLEWARE.insert(
-    MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
-    'gespro.middleware.LoginRequiredMiddleware'
-)
+# MIDDLEWARE.insert(
+#     MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
+#     'gespro.middleware.LoginRequiredMiddleware'
+# )
 
-# Lista blanca de correos permitidos
-ALLOWED_GOOGLE_EMAILS = [
-    "isaiasgoku15@gmail.com",
-    "otrocorreo@empresa.com",
-]
-ACCOUNT_ADAPTER = "proyectos.verificadorUsuarios.MyAccountAdapter"
+# # Lista blanca de correos permitidos
+# ALLOWED_GOOGLE_EMAILS = [
+#     "isaiasgoku15@gmail.com",
+#     "otrocorreo@empresa.com",
+# ]
+# ACCOUNT_ADAPTER = "proyectos.verificadorUsuarios.MyAccountAdapter"
 
