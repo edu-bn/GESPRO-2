@@ -149,6 +149,74 @@ docker compose ps
 docker ps --filter "health=unhealthy"
 ```
 
+# Manual DevOps
+
+# Sección 1: Configuración del Entorno de Desarrollo
+El primer paso para garantizar la consistencia en el despliegue es aislar las dependencias del proyecto utilizando un entorno virtual de Python.
+
+## 1.1 Creación del Entorno Virtual
+Para evitar conflictos entre las librerías del sistema y las del proyecto, creamos un entorno aislado (Crea el entorno virtual de tu preferencia):
+
+
+Bash
+Reemplaza 'env' por el nombre que prefieras para tu entorno
+```
+python -m venv env
+```
+## 1.2 Activación del Entorno
+Una vez creado, debemos "entrar" al entorno para que los comandos de Python utilicen el intérprete local:
+
+En Windows:
+
+PowerShell
+```
+.\env\Scripts\activate
+```
+
+En Linux/macOS:
+```
+source env/bin/activate
+```
+
+## 1.3 Instalación de Dependencias
+Con el entorno activo, procedemos a instalar todas las librerías necesarias definidas en el archivo de requerimientos:
+
+```
+pip install -r requirements.txt
+```
+
+# 2. Ejecución del Proyecto (Multi-Terminal)
+Para poner en marcha el ecosistema de desarrollo, es necesario mantener 2 terminales abiertas simultáneamente. Cada una se encarga de un proceso crítico del stack.
+
+## 2.1 Terminal 1: Servidor Backend (Django)
+Esta terminal gestiona la lógica de negocio, la base de datos y la API.
+
+Acceder al directorio del servidor:
+
+```
+cd backend
+```
+Sincronizar la base de datos (Migraciones):
+
+```
+python manage.py migrate
+```
+Iniciar el servidor de desarrollo:
+
+## 2.2 Terminal 2: Compilador de Estilos (Tailwind CSS)
+Django utiliza un paquete de integración para Tailwind que requiere una terminal dedicada para detectar cambios en el diseño en tiempo real.
+
+Instalar dependencias de Node.js (Solo la primera vez):
+
+```
+python manage.py tailwind install
+```
+Iniciar el observador (Watcher) de estilos:
+
+```
+python manage.py tailwind start
+```
+
 Si todos los servicios relevantes aparecen como healthy, el despliegue básico se considera correcto. 
 
 
