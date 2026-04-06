@@ -237,3 +237,4 @@ Q_CLUSTER = {
 # ]
 # ACCOUNT_ADAPTER = "proyectos.verificadorUsuarios.MyAccountAdapter"
 
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
