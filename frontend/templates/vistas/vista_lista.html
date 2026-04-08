@@ -76,7 +76,7 @@
                     </svg>
                 </button>
                 
-                <button class="btn-editar border px-2 py-1 text-white rounded flex items-center gap-1 border-gray-500"
+                <button classname="btn-editar" class="btn-editar border px-2 py-1 text-white rounded flex items-center gap-1 border-gray-500"
                         data-id="{{ act.id }}"
                         data-nombre="{{ act.nombre }}"
                         data-encargados="{% for e in act.encargados %}{{ e.nombre }}|{{ e.correo_electronico }}{% if not forloop.last %},{% endif %}{% endfor %}"
