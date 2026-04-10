@@ -5,8 +5,9 @@ import time
 import os
 
 BASE_DIR = os.path.dirname(__file__)
-ruta_archivo = os.path.join(BASE_DIR, "archivos", "plantilla.xlsx")
-ruta_archivo = os.path.abspath(ruta_archivo)
+# ruta_archivo = os.path.join(BASE_DIR, "archivos", "plantilla.xlsx")
+# ruta_archivo = os.path.abspath(ruta_archivo)
+ruta_archivo = "/home/Isaias/Repositorios/GESPROMM/tests/archivos/plantilla.xlsx"
 
 def crear_proyecto(driver, nombre, archivo):
     """
@@ -36,7 +37,7 @@ def crear_proyecto(driver, nombre, archivo):
     time.sleep(1)
 
     #Presionar "+ Crear Proyecto"
-    driver.find_element(By.NAME, "crear_proyecto").click()
+    driver.find_element(By.ID, "crear_proyecto").click()
     time.sleep(2)
 
     #Presionar "Confirmar"
@@ -44,10 +45,10 @@ def crear_proyecto(driver, nombre, archivo):
     time.sleep(2)
 
     #Ingresar al proyecto recién creado
-    driver.find_element(By.ID, "Proyecto de prueba").click()
+    driver.find_element(By.ID,nombre).click()
     time.sleep(2)
 
-    driver.quit()   
+
 
 def modificar_proyecto(driver, nombre):
     """
@@ -75,21 +76,23 @@ def modificar_proyecto(driver, nombre):
     time.sleep(2)
 
     #Modificar el texto en el input nombre situado primero
-    driver.find_element(By.ID, "editNombreInput").clear().send_keys("Actividad modwewficada")
+    driver.find_element(By.ID, "editNombreInput").clear()
+    driver.find_element(By.ID, "editNombreInput").send_keys("Actividad modificada")
     time.sleep(1)   
 
     #Presionar "Guardar"
     driver.find_element(By.ID, "saveChanges").click()
     time.sleep(2)
 
-    driver.quit()
 
 @pytest.mark.parametrize("nombre, ruta_archivo", [("Proyecto A", ruta_archivo), ("Proyecto B", ruta_archivo)])
 def test_crear_proyecto(driver, nombre, ruta_archivo):
     crear_proyecto(driver, nombre, ruta_archivo)
     assert nombre in driver.page_source
+    driver.quit()   
 
 @pytest.mark.parametrize("nombre", [("Proyecto A"), ("Proyecto B")])
 def test_modificar_proyecto(driver, nombre):
     modificar_proyecto(driver, nombre)
-    assert "Actividad modificada" in driver.page_source
+    assert "Actividad actualizada correctamente" in driver.page_source
+    driver.quit()   

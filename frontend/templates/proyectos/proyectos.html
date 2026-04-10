@@ -28,7 +28,7 @@
             <!-- Barra de color lateral -->
             <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-600 group-hover:w-2 transition-all duration-300"></div>
             
-            <a href="{% url 'vista_gantt' proyecto.id %}" class="block p-6 pl-8 pr-16">
+            <a id="{{proyecto.nombre}}" href="{% url 'vista_gantt' proyecto.id %}" class="block p-6 pl-8 pr-16">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="flex-1">
                         <h2 class="text-xl font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">

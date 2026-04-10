@@ -43,7 +43,7 @@
              class="px-3 py-1.5 rounded-lg text-base font-medium transition-all duration-200 {% if request.resolver_match.url_name == 'vista_gantt' %}bg-white text-blue-950{% else %}text-white/70 hover:text-white hover:bg-white/10{% endif %}">
             Gantt
           </a>
-          <a href="{% url 'lista_actividades' proyecto.id %}" 
+          <a id="nav-lista" href="{% url 'lista_actividades' proyecto.id %}" 
              class="px-3 py-1.5 rounded-lg text-base font-medium transition-all duration-200 {% if request.resolver_match.url_name == 'lista_actividades' %}bg-white text-blue-950{% else %}text-white/70 hover:text-white hover:bg-white/10{% endif %}">
             Lista
           </a>
