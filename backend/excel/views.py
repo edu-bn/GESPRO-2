@@ -95,8 +95,12 @@ def verificar_proyecto(request):
 
     return render(request, 'excel/importar_proyecto.html', {'form': form})
 
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 def importar_proyecto(request):
     if request.method == 'POST':
+        print(f"Datos recibidos en importar_proyecto: {request.POST}")
         nombre_proyecto = request.POST.get('nombre_proyecto')
         ruta_tmp = request.POST.get('archivo')
         
