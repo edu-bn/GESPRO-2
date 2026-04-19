@@ -223,4 +223,10 @@ python manage.py tailwind start
 
 Si todos los servicios relevantes aparecen como healthy, el despliegue básico se considera correcto. 
 
+# 3. Ejecución de Test
+Para poner en marcha el test es necesario posicionarse dentro de la carpeta ``tests`` y ejecutar el siguiente comando:
 
+```bash
+pytest
+```
+(debe estar ejecutándose el servidor web `python manage.py runserver`).
