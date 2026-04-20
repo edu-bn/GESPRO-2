@@ -2,6 +2,11 @@
 
 Proyecto Django + Superset para gestión de proyectos (GESPRO).
 
+## Enlace videos
+
+https://www.youtube.com/watch?v=IUz6CCK5rb8
+https://www.youtube.com/watch?v=FF5Q7foOpjo
+
 ## Índice
 
 - [Descripción breve](#descripción-breve)
