@@ -23,6 +23,8 @@ def driver():
 
     driver = webdriver.Chrome(options=options)
 
+    driver.get(BASE_URL)
+
     yield driver
 
     driver.quit()
