@@ -62,6 +62,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Install Tailwind dependencies
+        working-directory: frontend/theme/static_src
         run: npm install
 
       - name: Django system check
