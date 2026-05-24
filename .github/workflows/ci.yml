@@ -65,19 +65,22 @@ jobs:
         working-directory: frontend/theme/static_src
         run: npm install
 
-      - name: Django system check
-        run: python backend/manage.py check
+      - name: Django check
+        working-directory: backend
+        run: python manage.py check
 
       - name: Check migrations
-        run: python backend/manage.py makemigrations --check --dry-run
+        working-directory: backend
+        run: python manage.py makemigrations --check --dry-run
 
       - name: Build Tailwind
-        run: python backend/manage.py tailwind build
+        working-directory: backend
+        run: python manage.py tailwind build
 
-      - name: Run database migrations
-        run: python backend/manage.py migrate --noinput
+      - name: Run migrations
+        working-directory: backend
+        run: python manage.py migrate --noinput
 
       - name: Run tests
-        run: |
-          cd backend/tests
-          pytest
+        working-directory: backend/tests
+        run: pytest
