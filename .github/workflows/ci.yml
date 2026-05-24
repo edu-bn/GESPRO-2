@@ -1,0 +1,82 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci:
+
+    runs-on: ubuntu-latest
+
+    services:
+
+      postgres:
+        image: postgres:15-alpine
+
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+        ports:
+          - 5432:5432
+
+        options: >-
+          --health-cmd="pg_isready -U postgres -d test_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DB_HOST: localhost
+      POSTGRES_PORT: 5432
+
+      POSTGRES_DB: test_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+      DJANGO_SETTINGS_MODULE: backend.settings
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Tailwind dependencies
+        run: npm install
+
+      - name: Django system check
+        run: python backend/manage.py check
+
+      - name: Check migrations
+        run: python backend/manage.py makemigrations --check --dry-run
+
+      - name: Build Tailwind
+        run: python backend/manage.py tailwind build
+
+      - name: Run database migrations
+        run: python backend/manage.py migrate --noinput
+
+      - name: Run tests
+        run: |
+          cd backend/tests
+          pytest
