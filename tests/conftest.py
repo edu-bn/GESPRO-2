@@ -4,6 +4,7 @@ from selenium import webdriver
 import os 
 import django
 import sys
+from selenium.webdriver.chrome.options import Options
 
 BASE_URL = "http://localhost:8000"
 BASE_DIR = os.path.dirname(__file__)
@@ -14,10 +15,16 @@ sys.path.append(BACKEND_DIR)
 
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
-    driver.get(BASE_URL)
-    driver.maximize_window()
+    options = Options()
+
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
+
     yield driver
+
     driver.quit()
 
 
