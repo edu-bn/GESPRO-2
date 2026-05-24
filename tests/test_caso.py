@@ -92,13 +92,13 @@ def modificar_proyecto(driver, nombre):
     time.sleep(2)
 
 
-@pytest.mark.parametrize("setup_crear_proyecto", [("Proyecto A"), ("Proyecto B")], indirect=True)
+@pytest.mark.parametrize("setup_crear_proyecto", [("Proyecto A"), ("Proyecto C")], indirect=True)
 def test_crear_proyecto(driver, setup_crear_proyecto):
     crear_proyecto(driver, setup_crear_proyecto, ruta_archivo)
     assert setup_crear_proyecto in driver.page_source
     driver.quit()   
 
-@pytest.mark.parametrize("setup_modificar_proyecto", [("Proyecto A"), ("Proyecto B")], indirect=True)
+@pytest.mark.parametrize("setup_modificar_proyecto", [("Proyecto A"), ("Proyecto C")], indirect=True)
 def test_modificar_proyecto(driver, setup_modificar_proyecto):
     modificar_proyecto(driver, setup_modificar_proyecto)
     assert setup_modificar_proyecto in driver.page_source
