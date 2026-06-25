@@ -1,38 +1,310 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+name: Reporte de Bug
+description: Reporta un error, falla o comportamiento inesperado del sistema
+title: "[BUG]: "
+labels: ["bug", "needs-triage"]
+assignees: []
 
----
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Reporte de incidencia
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+        Gracias por reportar este problema.  
+        Completa la información con el mayor detalle posible para que el equipo de desarrollo pueda analizar, reproducir y resolver la incidencia.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+        Antes de enviar este reporte, asegúrate de que:
+        - La incidencia no haya sido reportada anteriormente.
+        - El problema sea reproducible.
+        - Incluyas evidencia como capturas, videos, logs o mensajes de error cuando sea posible.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+  - type: checkboxes
+    id: preliminary_checks
+    attributes:
+      label: Verificaciones previas
+      description: Confirma los siguientes puntos antes de enviar la incidencia.
+      options:
+        - label: He buscado incidencias similares y no encontré un duplicado.
+          required: true
+        - label: El problema ocurre con la versión más reciente disponible del proyecto.
+          required: false
+        - label: El problema se puede reproducir siguiendo los pasos descritos.
+          required: true
+        - label: He incluido evidencia suficiente para ayudar al análisis.
+          required: false
+        - label: Este reporte corresponde a un bug y no a una solicitud de mejora.
+          required: true
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidad
+      description: Indica qué tan grave es el problema.
+      options:
+        - Crítica - El sistema queda inutilizable o hay pérdida de datos
+        - Alta - Funcionalidad principal afectada
+        - Media - Funcionalidad secundaria afectada
+        - Baja - Error menor, visual o de bajo impacto
+    validations:
+      required: true
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad sugerida
+      description: Indica qué tan urgente consideras resolver esta incidencia.
+      options:
+        - Urgente
+        - Alta
+        - Media
+        - Baja
+    validations:
+      required: true
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+  - type: dropdown
+    id: affected_area
+    attributes:
+      label: Área afectada
+      description: Selecciona el módulo, componente o área donde ocurre el problema.
+      options:
+        - Frontend
+        - Backend
+        - Base de datos
+        - API
+        - Autenticación / autorización
+        - UI / UX
+        - Rendimiento
+        - Seguridad
+        - Integraciones externas
+        - DevOps / despliegue
+        - Documentación
+        - Otro
+    validations:
+      required: true
 
-**Additional context**
-Add any other context about the problem here.
+  - type: input
+    id: affected_module
+    attributes:
+      label: Módulo, vista o funcionalidad específica
+      description: Indica dónde ocurre exactamente el problema.
+      placeholder: Ej. Login, registro de usuarios, dashboard, carrito de compras, API /users
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Descripción del problema
+      description: Explica claramente qué ocurrió.
+      placeholder: Describe el bug de forma clara y concisa.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Pasos para reproducir
+      description: Indica los pasos exactos para reproducir el problema.
+      placeholder: |
+        1. Ir a...
+        2. Hacer clic en...
+        3. Ingresar...
+        4. Ejecutar...
+        5. Observar el error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: Comportamiento actual
+      description: Describe qué está ocurriendo actualmente.
+      placeholder: Actualmente el sistema...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Comportamiento esperado
+      description: Describe qué debería ocurrir en lugar del error.
+      placeholder: Se esperaba que el sistema...
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia
+      description: Agrega capturas de pantalla, videos, GIFs, enlaces, logs o cualquier archivo que ayude a entender el problema.
+      placeholder: |
+        Puedes adjuntar evidencia arrastrando archivos directamente aquí.
+
+        Incluye, si aplica:
+        - Capturas de pantalla
+        - Videos del error
+        - GIFs mostrando el flujo
+        - Logs de consola
+        - Logs del servidor
+        - Mensajes de error completos
+        - Respuestas de la API
+        - Enlaces a grabaciones o archivos externos
+    validations:
+      required: false
+
+  - type: textarea
+    id: error_logs
+    attributes:
+      label: Logs o mensajes de error
+      description: Pega aquí cualquier error mostrado en consola, backend, terminal, navegador o sistema de monitoreo.
+      render: shell
+      placeholder: |
+        Ejemplo:
+        TypeError: Cannot read properties of undefined
+        at Component.render (...)
+    validations:
+      required: false
+
+  - type: textarea
+    id: api_response
+    attributes:
+      label: Respuesta de API relacionada
+      description: Si el problema involucra una API, pega aquí el request, response, status code o payload relevante.
+      render: json
+      placeholder: |
+        {
+          "status": 500,
+          "message": "Internal server error"
+        }
+    validations:
+      required: false
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frecuencia del problema
+      description: Indica con qué frecuencia ocurre el bug.
+      options:
+        - Siempre ocurre
+        - Ocurre frecuentemente
+        - Ocurre ocasionalmente
+        - Ocurrió una sola vez
+        - No estoy seguro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Ambiente donde ocurre
+      description: Selecciona el ambiente en el que se detectó el problema.
+      options:
+        - Local
+        - Desarrollo
+        - Testing / QA
+        - Staging
+        - Producción
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: project_version
+    attributes:
+      label: Versión del proyecto
+      description: Indica la versión, release, commit o rama donde ocurre el problema.
+      placeholder: Ej. v1.2.0, commit abc123, branch develop
+    validations:
+      required: false
+
+  - type: input
+    id: operating_system
+    attributes:
+      label: Sistema operativo
+      description: Indica el sistema operativo donde ocurrió el problema.
+      placeholder: Ej. Windows 11, Ubuntu 22.04, macOS Sonoma, Android 14, iOS 17
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Navegador
+      description: Completa solo si aplica.
+      placeholder: Ej. Chrome 124, Firefox 125, Safari 17, Edge 124
+    validations:
+      required: false
+
+  - type: input
+    id: device
+    attributes:
+      label: Dispositivo
+      description: Indica el dispositivo usado, si aplica.
+      placeholder: Ej. PC escritorio, notebook, Samsung Galaxy, iPhone, tablet
+    validations:
+      required: false
+
+  - type: input
+    id: screen_resolution
+    attributes:
+      label: Resolución de pantalla
+      description: Completa solo si el problema es visual o de interfaz.
+      placeholder: Ej. 1920x1080, 1366x768, 390x844
+    validations:
+      required: false
+
+  - type: textarea
+    id: user_role
+    attributes:
+      label: Usuario, rol o permisos involucrados
+      description: Indica si el problema depende de un tipo de usuario, rol o permiso específico.
+      placeholder: Ej. Administrador, usuario normal, invitado, usuario sin permisos, cliente, operador
+    validations:
+      required: false
+
+  - type: textarea
+    id: business_impact
+    attributes:
+      label: Impacto en el negocio o usuario
+      description: Explica cómo afecta este problema al usuario, al flujo del sistema o al negocio.
+      placeholder: Ej. Impide completar compras, bloquea el inicio de sesión, genera datos incorrectos, afecta reportes...
+    validations:
+      required: false
+
+  - type: textarea
+    id: possible_cause
+    attributes:
+      label: Posible causa
+      description: Si tienes una hipótesis técnica sobre el origen del problema, indícala aquí.
+      placeholder: Ej. Parece estar relacionado con validación de formularios, token expirado, respuesta nula de la API...
+    validations:
+      required: false
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Solución temporal
+      description: Indica si existe alguna forma temporal de evitar o mitigar el problema.
+      placeholder: Ej. Recargar la página, limpiar caché, usar otro navegador, ejecutar nuevamente el proceso...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Contexto adicional
+      description: Agrega cualquier información extra que pueda ayudar al equipo de desarrollo.
+      placeholder: Incluye detalles adicionales, enlaces relacionados, incidencias asociadas o comentarios relevantes.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: final_confirmation
+    attributes:
+      label: Confirmación final
+      description: Confirma que la información entregada es correcta.
+      options:
+        - label: Confirmo que la información entregada es precisa según mi conocimiento.
+          required: true
+        - label: Confirmo que adjunté evidencia o expliqué por qué no fue posible adjuntarla.
+          required: true
